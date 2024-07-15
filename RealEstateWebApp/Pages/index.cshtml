@@ -1,0 +1,39 @@
+@page 
+@model RealEstateWebApp.Pages.IndexModel
+
+<head>
+    <!-- other head elements -->
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<a asp-page="/AddHome">AddHome</a>
+
+<h2>List of Homes</h2>
+
+@if(Model.Homes != null && Model.Homes.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Price</th>
+                <th>Address</th>
+                <th>Square meters</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var home in Model.Homes)
+            {
+                <tr class="@(home.Price > Model.ThresholdPrice ?  "expensive-home" : "")">
+                    <td>@home.Price.ToString("C")</td>
+                    <td>@home.Address</td>
+                    <td>@home.Area</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No homes available.</p>
+}
+
